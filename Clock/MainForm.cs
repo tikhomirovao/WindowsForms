@@ -142,5 +142,11 @@ namespace Clock
                 }
             }
         }
+
+        private void cmChoosefont_Click(object sender, EventArgs e)
+        {
+            ChooseFontForm chooseFont = new ChooseFontForm();
+            chooseFont.ShowDialog();
+        }
     }
 }
