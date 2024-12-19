@@ -19,8 +19,9 @@ namespace Clock
             labelTime.BackColor = Color.AliceBlue;
 
             this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - this.Width, 50);
+            SetVisibility(false);
         }
-        void SetVisibility(bool visible) 
+        void SetVisibility(bool visible)
         {
             cbShowDate.Visible = visible;
             cbShowWeekDay.Visible = visible;
@@ -36,12 +37,12 @@ namespace Clock
                 "hh:mm:ss tt",
                 System.Globalization.CultureInfo.InvariantCulture
                 );
-            if(cbShowDate.Checked ) 
+            if (cbShowDate.Checked)
             {
                 labelTime.Text += "\n";
                 labelTime.Text += DateTime.Now.ToString("dd.MM.yyyy");
             }
-            if(cbShowWeekDay.Checked)
+            if (cbShowWeekDay.Checked)
             {
                 labelTime.Text += "\n";
                 labelTime.Text += DateTime.Now.DayOfWeek;
@@ -51,31 +52,32 @@ namespace Clock
 
         private void btnHideControls_Click(object sender, EventArgs e)
         {
-/*            cbShowDate.Visible = false;
-            btnHideControls.Visible = false;
-            this.TransparencyKey = this.BackColor;
-            this.FormBorderStyle = FormBorderStyle.None;
-            labelTime.BackColor = Color.AliceBlue;
-            this.ShowInTaskbar = false;*/
-            SetVisibility(false);
+            /*            cbShowDate.Visible = false;
+                        btnHideControls.Visible = false;
+                        this.TransparencyKey = this.BackColor;
+                        this.FormBorderStyle = FormBorderStyle.None;
+                        labelTime.BackColor = Color.AliceBlue;
+                        this.ShowInTaskbar = false;*/
+
+            SetVisibility(cmShowControls.Checked = false);
         }
 
         private void labelTime_DoubleClick(object sender, EventArgs e)
         {
-/*            cbShowDate.Visible = true;
-            btnHideControls.Visible = true;
-            this.TransparencyKey = Color.Empty;
-            this.BackColor = Color.MidnightBlue;
-            this.ShowInTaskbar = true;
-            MessageBox.Show
-                (
-                this,
-                "Неожиданно,но оно сработало 0_0",
-                "Info",
-                MessageBoxButtons.OK, 
-                MessageBoxIcon.Information 
-                );*/
-            SetVisibility(true);
+            /*            cbShowDate.Visible = true;
+                        btnHideControls.Visible = true;
+                        this.TransparencyKey = Color.Empty;
+                        this.BackColor = Color.MidnightBlue;
+                        this.ShowInTaskbar = true;
+                        MessageBox.Show
+                            (
+                            this,
+                            "Неожиданно,но оно сработало 0_0",
+                            "Info",
+                            MessageBoxButtons.OK, 
+                            MessageBoxIcon.Information 
+                            );*/
+            SetVisibility(cmShowControls.Checked = true);
         }
 
         private void cmExit_Click(object sender, EventArgs e)
@@ -110,10 +112,34 @@ namespace Clock
 
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            if(!this.TopMost) 
+            if (!this.TopMost)
             {
                 this.TopMost = true;
                 this.TopMost = false;
+            }
+        }
+
+        private void cmShowControls_CheckedChanged(object sender, EventArgs e)
+        {
+            SetVisibility(cmShowControls.Checked);
+        }
+
+        private void SetColor(object sender, EventArgs e)
+        {
+            ColorDialog dialog = new ColorDialog();
+            switch ((sender as ToolStripMenuItem).Text) // или switch (((ToolStripMenuItem)sender).Text)
+            {
+                case "Background color" : dialog.Color = labelTime.BackColor; break;
+                case "Foreground color" : dialog.Color = labelTime.ForeColor; break;
+            }
+            if(dialog.ShowDialog() == DialogResult.OK) 
+            {
+                switch((sender as ToolStripMenuItem).Text) //as - это оператор преобразования типа
+                    //Оператор 'as' значение слева приводит к типу справа
+                {
+                    case "Background color" : labelTime.BackColor = dialog.Color; break;
+                    case "Foreground color" : labelTime.ForeColor = dialog.Color; break;
+                }
             }
         }
     }
