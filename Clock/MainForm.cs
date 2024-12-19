@@ -6,20 +6,24 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Clock
 {
     public partial class MainForm : Form
     {
+        ChooseFontForm fontDialog = null;
         public MainForm()
         {
             InitializeComponent();
             labelTime.BackColor = Color.AliceBlue;
-
             this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - this.Width, 50);
             SetVisibility(false);
+            cmShowConsole.Checked = true;
+            fontDialog= new ChooseFontForm();
         }
         void SetVisibility(bool visible)
         {
@@ -145,8 +149,22 @@ namespace Clock
 
         private void cmChoosefont_Click(object sender, EventArgs e)
         {
-            ChooseFontForm chooseFont = new ChooseFontForm();
-            chooseFont.ShowDialog();
+            //ChooseFontForm chooseFont = new ChooseFontForm();
+            //chooseFont.ShowDialog();
+            if(fontDialog.ShowDialog() == DialogResult.OK)
+                labelTime.Font = fontDialog.Font;
         }
+
+        private void cmShowConsole_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((sender as ToolStripMenuItem).Checked)
+                AllocConsole();
+            else
+                FreeConsole();
+        }
+        [DllImport("kernel32.dll")]
+        public static extern bool AllocConsole();
+        [DllImport("kernel32.dll")]
+        public static extern bool FreeConsole();
     }
 }
