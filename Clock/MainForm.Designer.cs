@@ -37,6 +37,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cmShowdate = new System.Windows.Forms.ToolStripMenuItem();
             this.cmShowweekday = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmShowConsole = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cmChoosefont = new System.Windows.Forms.ToolStripMenuItem();
             this.cmColors = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,7 +45,6 @@
             this.cmForeColor = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.cmExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmShowConsole = new System.Windows.Forms.ToolStripMenuItem();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.cbShowDate = new System.Windows.Forms.CheckBox();
             this.btnHideControls = new System.Windows.Forms.Button();
@@ -121,6 +121,14 @@
             this.cmShowweekday.Text = "Show weekday";
             this.cmShowweekday.CheckedChanged += new System.EventHandler(this.cmShowweekday_CheckedChanged);
             // 
+            // cmShowConsole
+            // 
+            this.cmShowConsole.CheckOnClick = true;
+            this.cmShowConsole.Name = "cmShowConsole";
+            this.cmShowConsole.Size = new System.Drawing.Size(152, 22);
+            this.cmShowConsole.Text = "Show console";
+            this.cmShowConsole.CheckedChanged += new System.EventHandler(this.cmShowConsole_CheckedChanged);
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -167,14 +175,6 @@
             this.cmExit.Size = new System.Drawing.Size(152, 22);
             this.cmExit.Text = "Exit";
             this.cmExit.Click += new System.EventHandler(this.cmExit_Click);
-            // 
-            // cmShowConsole
-            // 
-            this.cmShowConsole.CheckOnClick = true;
-            this.cmShowConsole.Name = "cmShowConsole";
-            this.cmShowConsole.Size = new System.Drawing.Size(152, 22);
-            this.cmShowConsole.Text = "Show console";
-            this.cmShowConsole.CheckedChanged += new System.EventHandler(this.cmShowConsole_CheckedChanged);
             // 
             // timer
             // 
@@ -241,6 +241,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Clock PV_319";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
