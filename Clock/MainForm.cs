@@ -22,8 +22,10 @@ namespace Clock
             InitializeComponent();
             labelTime.BackColor = Color.Black;
             labelTime.ForeColor = Color.Red;
+
             this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - this.Width, 50);
             SetVisibility(false);
+
             cmShowConsole.Checked = true;
             LoadSetting();
             //fontDialog = new ChooseFontForm();
@@ -67,7 +69,7 @@ namespace Clock
             string font_name = sr.ReadLine();
             int font_size = (int)Convert.ToDouble(sr.ReadLine());
             sr.Close();
-            fontDialog= new ChooseFontForm(font_name, font_size);
+            fontDialog= new ChooseFontForm(this, font_name, font_size);
             labelTime.Font = fontDialog.Font;
         }
         private void timer_Tick(object sender, EventArgs e)
@@ -212,9 +214,9 @@ namespace Clock
         {
             string key_Name = "ClockPv_319";
             RegistryKey rk = Registry.CurrentUser.OpenSubKey
-                (
+            (
                 "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true
-                ); //true - открое ветку на запись
+            ); //true - открое ветку на запись
             if (cmLoadOnWinStartup.Checked) rk.SetValue(key_Name, Application.ExecutablePath);
             else rk.DeleteValue(key_Name, false);
             rk.Dispose();
