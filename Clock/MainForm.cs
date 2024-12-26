@@ -17,6 +17,7 @@ namespace Clock
     public partial class MainForm : Form
     {
         ChooseFontForm fontDialog = null;
+        AlarmsForm alarms = null;
         public MainForm()
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace Clock
             cmShowConsole.Checked = true;
             LoadSetting();
             //fontDialog = new ChooseFontForm();
+            alarms = new AlarmsForm();
         }
         void SetVisibility(bool visible)
         {
@@ -214,10 +216,17 @@ namespace Clock
             RegistryKey rk = Registry.CurrentUser.OpenSubKey
                 (
                 "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true
-                ); //true - открое ветку на запись
+                ); //true - откроет ветку на запись
             if (cmLoadOnWinStartup.Checked) rk.SetValue(key_Name, Application.ExecutablePath);
             else rk.DeleteValue(key_Name, false);
             rk.Dispose();
+        }
+
+        private void cmAlarm_Click(object sender, EventArgs e)
+        {
+            alarms.StartPosition= FormStartPosition.Manual;
+            alarms.Location = new Point(this.Location.X - alarms.Width, this.Location.Y*2);
+            alarms.ShowDialog();
         }
     }
 }
