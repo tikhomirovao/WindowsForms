@@ -36,6 +36,8 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnFile = new System.Windows.Forms.Button();
             this.clbWeekDays = new System.Windows.Forms.CheckedListBox();
+            this.rtbMessage = new System.Windows.Forms.RichTextBox();
+            this.lblMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cbUseDate
@@ -76,7 +78,7 @@
             // lblAlarmFile
             // 
             this.lblAlarmFile.AutoSize = true;
-            this.lblAlarmFile.Location = new System.Drawing.Point(12, 121);
+            this.lblAlarmFile.Location = new System.Drawing.Point(12, 204);
             this.lblAlarmFile.Name = "lblAlarmFile";
             this.lblAlarmFile.Size = new System.Drawing.Size(26, 13);
             this.lblAlarmFile.TabIndex = 3;
@@ -111,6 +113,7 @@
             this.btnFile.TabIndex = 6;
             this.btnFile.Text = "Choose file";
             this.btnFile.UseVisualStyleBackColor = true;
+            this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
             // 
             // clbWeekDays
             // 
@@ -132,11 +135,32 @@
             this.clbWeekDays.Size = new System.Drawing.Size(421, 19);
             this.clbWeekDays.TabIndex = 7;
             // 
+            // rtbMessage
+            // 
+            this.rtbMessage.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rtbMessage.Location = new System.Drawing.Point(13, 143);
+            this.rtbMessage.Name = "rtbMessage";
+            this.rtbMessage.Size = new System.Drawing.Size(421, 58);
+            this.rtbMessage.TabIndex = 8;
+            this.rtbMessage.Text = "";
+            // 
+            // lblMessage
+            // 
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblMessage.Location = new System.Drawing.Point(10, 117);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(120, 15);
+            this.lblMessage.TabIndex = 9;
+            this.lblMessage.Text = "Введите сообщение:";
+            // 
             // AddAlarmForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(441, 287);
+            this.Controls.Add(this.lblMessage);
+            this.Controls.Add(this.rtbMessage);
             this.Controls.Add(this.clbWeekDays);
             this.Controls.Add(this.btnFile);
             this.Controls.Add(this.btnCancel);
@@ -163,5 +187,7 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnFile;
         private System.Windows.Forms.CheckedListBox clbWeekDays;
+        private System.Windows.Forms.RichTextBox rtbMessage;
+        private System.Windows.Forms.Label lblMessage;
     }
 }
