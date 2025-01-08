@@ -26,7 +26,7 @@ namespace Clock
 
         private void cbUseDate_CheckedChanged(object sender, EventArgs e)
         {
-            dtpDate.Enabled= cbUseDate.Checked;
+            dtpDate.Enabled = cbUseDate.Checked;
         }
 
         private void btnOK_Click(object sender, EventArgs e)

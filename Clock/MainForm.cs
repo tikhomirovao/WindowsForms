@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Diagnostics;
 using Microsoft.Win32;
+using System.Media;
 
 namespace Clock
 {
@@ -76,7 +77,7 @@ namespace Clock
         {
             labelTime.Text = DateTime.Now.ToString
                 (
-                "hh:mm:ss tt",
+                "hh:mm:ss",
                 System.Globalization.CultureInfo.InvariantCulture
                 );
             if (cbShowDate.Checked)
@@ -91,7 +92,7 @@ namespace Clock
             }
             notifyIcon.Text = labelTime.Text;
         }
-
+        
         private void btnHideControls_Click(object sender, EventArgs e)
         {
             /*            cbShowDate.Visible = false;
