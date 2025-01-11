@@ -43,11 +43,13 @@ namespace Clock
             Alarm.Filename = lblAlarmFile.Text;
             Alarm.Message = rtbMessage.Text;
             if (Alarm.Filename == "File:")
+            {
                 this.DialogResult = DialogResult.None;
-            MessageBox.Show
-                (
-                this, "Выберите звуковой файл", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning
-                );
+                MessageBox.Show
+                    (
+                    this, "Выберите звуковой файл", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning
+                    );
+            }
         }
 
         private void btnFile_Click(object sender, EventArgs e)
