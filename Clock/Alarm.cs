@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clock
 {
-    public class Alarm:IComparable
+    public class Alarm:IComparable<Alarm>
     {
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }
@@ -16,6 +16,24 @@ namespace Clock
         public Alarm() 
         {
 
+        }
+        public Alarm(DateTime date, TimeSpan time, Week week, string filename, string message)
+        {
+            this.Date = date;
+            this.Time = time;
+            this.Weekdays = week;
+            this.Filename = filename;
+            this.Message = message;
+            Console.WriteLine($"Constructor:{this.GetHashCode()}");
+        }
+        public Alarm(Alarm other)
+        {
+            this.Date = other.Date;
+            this.Time = other.Time;
+            this.Weekdays = other.Weekdays;
+            this.Filename = other.Filename;
+            this.Message = other.Message;
+            Console.WriteLine($"CopyConstructor:{this.GetHashCode()}");
         }
         public override string ToString()
         {
@@ -51,9 +69,9 @@ namespace Clock
             }
             else return left.Time < right.Time;
         }*/
-        public int CompareTo(object other)
+        public int CompareTo(Alarm other)
         {
-            return this.Time.CompareTo((other as Alarm).Time);
+            return this.Time.CompareTo(other.Time);
         }
     }
 }
