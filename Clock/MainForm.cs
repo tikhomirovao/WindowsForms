@@ -31,7 +31,9 @@ namespace Clock
             LoadSetting();
             //fontDialog = new ChooseFontForm();
             alarms = new AlarmsForm();
-            //Console.WriteLine(DateTime.MinValue);
+            Console.WriteLine(DateTime.MinValue);
+            //CompareAlarmsDEBUG();
+            
         }
         void SetVisibility(bool visible)
         {
@@ -100,8 +102,19 @@ namespace Clock
             }
             notifyIcon.Text = labelTime.Text;
 
+            if(
+                nextAlarm != null &&
+                nextAlarm.Time.Hours == DateTime.Now.Hour &&
+                nextAlarm.Time.Minutes == DateTime.Now.Minute &&
+                nextAlarm.Time.Seconds == DateTime.Now.Second)
+            {
+                System.Threading.Thread.Sleep(1000);
+                MessageBox.Show(this, nextAlarm.ToString(), "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                nextAlarm = null;
+            }
+
             if (alarms.LB_Alarms.Items.Count > 0) nextAlarm = FindNextAlarm(); //alarms.LB_Alarms.Items.Cast<Alarm>().ToArray().Min();
-            if(nextAlarm != null) Console.WriteLine(nextAlarm);
+            if (nextAlarm != null) Console.WriteLine(nextAlarm);
         }
         
         private void btnHideControls_Click(object sender, EventArgs e)
