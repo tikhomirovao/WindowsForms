@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Media;
 
 namespace Clock
 {
@@ -19,6 +18,10 @@ namespace Clock
         {
             InitializeComponent();
             dtpDate.Enabled = false;
+            for (int i = 0; i < clbWeekDays.Items.Count; i++)
+            {
+                clbWeekDays.SetItemChecked(i, true);
+            }
             Alarm = new Alarm();
             open = new OpenFileDialog();
             open.Filter = "Sound files (*.mp3,*.wav,*.flac)|*.mp3;*.wav;*.flac|MP-3 (*.mp3)|*.mp3|WAV (*.wav)|*.wav|Flac (*.flac)|*.flac";
@@ -27,6 +30,7 @@ namespace Clock
         private void cbUseDate_CheckedChanged(object sender, EventArgs e)
         {
             dtpDate.Enabled = cbUseDate.Checked;
+            clbWeekDays.Enabled =! cbUseDate.Checked;
         }
         void SetWeekDays(bool[] week)
         {
@@ -68,15 +72,18 @@ namespace Clock
 
         private void AddAlarmForm_Load(object sender, EventArgs e)
         {
-            if (Alarm.Date != DateTime.MinValue)
+            if (true)
             {
-                cbUseDate.Checked = true;
-                dtpDate.Value = Alarm.Date;
+                if (Alarm.Date != DateTime.MinValue)
+                {
+                    cbUseDate.Checked = true;
+                    dtpDate.Value = Alarm.Date;
+                }
+                dtpTime.Value = DateTime.Now.Date + Alarm.Time;
+                SetWeekDays(Alarm.Weekdays.ExtractWeekDays());
+                lblAlarmFile.Text = Alarm.Filename;
+                rtbMessage.Text = Alarm.Message; 
             }
-            dtpTime.Value = DateTime.Now.Date + Alarm.Time;
-            SetWeekDays(Alarm.Weekdays.ExtractWeekDays());
-            lblAlarmFile.Text = Alarm.Filename;
-            rtbMessage.Text = Alarm.Message;
         }
     }
 }

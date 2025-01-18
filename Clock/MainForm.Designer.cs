@@ -53,7 +53,9 @@
             this.btnHideControls = new System.Windows.Forms.Button();
             this.cbShowWeekDay = new System.Windows.Forms.CheckBox();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.axWindowsMediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.contextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer)).BeginInit();
             this.SuspendLayout();
             // 
             // labelTime
@@ -88,7 +90,7 @@
             this.cmLoadOnWinStartup,
             this.cmExit});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(210, 270);
+            this.contextMenu.Size = new System.Drawing.Size(210, 248);
             // 
             // cmTopmost
             // 
@@ -212,7 +214,7 @@
             this.cbShowDate.AutoSize = true;
             this.cbShowDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbShowDate.ForeColor = System.Drawing.Color.Red;
-            this.cbShowDate.Location = new System.Drawing.Point(21, 163);
+            this.cbShowDate.Location = new System.Drawing.Point(21, 132);
             this.cbShowDate.Name = "cbShowDate";
             this.cbShowDate.Size = new System.Drawing.Size(176, 29);
             this.cbShowDate.TabIndex = 1;
@@ -224,7 +226,7 @@
             // 
             this.btnHideControls.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnHideControls.ForeColor = System.Drawing.Color.Red;
-            this.btnHideControls.Location = new System.Drawing.Point(21, 271);
+            this.btnHideControls.Location = new System.Drawing.Point(21, 202);
             this.btnHideControls.Name = "btnHideControls";
             this.btnHideControls.Size = new System.Drawing.Size(176, 52);
             this.btnHideControls.TabIndex = 2;
@@ -237,7 +239,7 @@
             this.cbShowWeekDay.AutoSize = true;
             this.cbShowWeekDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbShowWeekDay.ForeColor = System.Drawing.Color.Red;
-            this.cbShowWeekDay.Location = new System.Drawing.Point(21, 211);
+            this.cbShowWeekDay.Location = new System.Drawing.Point(21, 167);
             this.cbShowWeekDay.Name = "cbShowWeekDay";
             this.cbShowWeekDay.Size = new System.Drawing.Size(256, 29);
             this.cbShowWeekDay.TabIndex = 3;
@@ -253,11 +255,21 @@
             this.notifyIcon.Visible = true;
             this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
             // 
+            // axWindowsMediaPlayer
+            // 
+            this.axWindowsMediaPlayer.Enabled = true;
+            this.axWindowsMediaPlayer.Location = new System.Drawing.Point(21, 277);
+            this.axWindowsMediaPlayer.Name = "axWindowsMediaPlayer";
+            this.axWindowsMediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer.OcxState")));
+            this.axWindowsMediaPlayer.Size = new System.Drawing.Size(256, 44);
+            this.axWindowsMediaPlayer.TabIndex = 4;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(286, 362);
+            this.Controls.Add(this.axWindowsMediaPlayer);
             this.Controls.Add(this.cbShowWeekDay);
             this.Controls.Add(this.btnHideControls);
             this.Controls.Add(this.cbShowDate);
@@ -269,6 +281,7 @@
             this.Text = "Clock PV_319";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.contextMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -299,6 +312,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem cmLoadOnWinStartup;
         private System.Windows.Forms.ToolStripMenuItem cmAlarms;
+        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer;
     }
 }
 

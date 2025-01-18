@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Clock
 {
-    public class Alarm:IComparable<Alarm>
+    public class Alarm : IComparable<Alarm>
     {
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }
         public Week Weekdays { get; set; }
         public string Filename { get; set; }
         public string Message { get; set; }
-        public Alarm() 
+        public Alarm()
         {
             Weekdays = new Week();
         }
@@ -47,28 +48,41 @@ namespace Clock
             info += $"{Message}\t";
             return info;
         }
-/*        public static bool operator > (Alarm left, Alarm right)
+/*        public static bool operator == (Alarm left, Alarm right)
         {
-            if (left.Date != DateTime.MinValue || right.Date != DateTime.MinValue)
-            {
-                return 
-                    (left.Date == DateTime.MinValue ? DateTime.Today:left.Date)      >=
-                    (right.Date == DateTime.MinValue ? DateTime.Today:right.Date)   &&
-                    left.Time > right.Time;
-            }
-            else return left.Time > right.Time;
+            return
+                left.Date == right.Date &&
+                left.Time == right.Time &&
+                left.Weekdays == right.Weekdays &&
+                left.Filename == right.Filename &&
+                left.Message == right.Message;
         }
-        public static bool operator < (Alarm left, Alarm right)
+        public static bool operator != (Alarm left,Alarm right)
         {
-            if(left.Date != DateTime.MinValue || right.Date != DateTime.MinValue)
-            {
-                return
-                    (left.Date == DateTime.MinValue ? DateTime.Today : left.Date) <=
-                    (right.Date == DateTime.MinValue ? DateTime.Today : right.Date) &&
-                    left.Time > right.Time;
-            }
-            else return left.Time < right.Time;
+            return !(left == right);
         }*/
+        /*        public static bool operator > (Alarm left, Alarm right)
+                {
+                    if (left.Date != DateTime.MinValue || right.Date != DateTime.MinValue)
+                    {
+                        return 
+                            (left.Date == DateTime.MinValue ? DateTime.Today:left.Date)      >=
+                            (right.Date == DateTime.MinValue ? DateTime.Today:right.Date)   &&
+                            left.Time > right.Time;
+                    }
+                    else return left.Time > right.Time;
+                }
+                public static bool operator < (Alarm left, Alarm right)
+                {
+                    if(left.Date != DateTime.MinValue || right.Date != DateTime.MinValue)
+                    {
+                        return
+                            (left.Date == DateTime.MinValue ? DateTime.Today : left.Date) <=
+                            (right.Date == DateTime.MinValue ? DateTime.Today : right.Date) &&
+                            left.Time > right.Time;
+                    }
+                    else return left.Time < right.Time;
+                }*/
         public int CompareTo(Alarm other)
         {
             return this.Time.CompareTo(other.Time);

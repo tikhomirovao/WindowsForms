@@ -11,7 +11,6 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Diagnostics;
 using Microsoft.Win32;
-using System.Media;
 
 namespace Clock
 {
@@ -33,7 +32,7 @@ namespace Clock
             alarms = new AlarmsForm();
             Console.WriteLine(DateTime.MinValue);
             //CompareAlarmsDEBUG();
-            
+            axWindowsMediaPlayer.Visible = false;
         }
         void SetVisibility(bool visible)
         {
@@ -83,6 +82,17 @@ namespace Clock
             //Alarm nextAlarm = new Alarm(actualAlarms.Min()); //new Alarm(alarms.LB_Alarms.Items.Cast<Alarm>().ToArray().Min());
             return actualAlarms.Min();
         }
+        bool CompareDates(DateTime date1, DateTime date2)
+        {
+            return date1.Year == date2.Year && date1.Month == date2.Month && date1.Day == date2.Day;
+        }
+        void PlayAlarm()
+        {
+            axWindowsMediaPlayer.URL = nextAlarm.Filename;
+            axWindowsMediaPlayer.settings.volume = 100;
+            axWindowsMediaPlayer.Ctlcontrols.play();
+            axWindowsMediaPlayer.Visible = true;
+        }
         private void timer_Tick(object sender, EventArgs e)
         {
             labelTime.Text = DateTime.Now.ToString
@@ -102,14 +112,23 @@ namespace Clock
             }
             notifyIcon.Text = labelTime.Text;
 
-            if(
+            if  (
                 nextAlarm != null &&
+                (
+                nextAlarm.Date == DateTime.MinValue ?
+                nextAlarm.Weekdays.Contains(DateTime.Now.DayOfWeek) : 
+                CompareDates(nextAlarm.Date,DateTime.Now)
+                ) &&
+                // || nextAlarm.Date == DateTime.MinValue.Date)// &&
+                //nextAlarm.Weekdays.Contains(DateTime.Now.DayOfWeek)// &&
                 nextAlarm.Time.Hours == DateTime.Now.Hour &&
                 nextAlarm.Time.Minutes == DateTime.Now.Minute &&
-                nextAlarm.Time.Seconds == DateTime.Now.Second)
+                nextAlarm.Time.Seconds == DateTime.Now.Second
+                )
             {
                 System.Threading.Thread.Sleep(1000);
-                MessageBox.Show(this, nextAlarm.ToString(), "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                PlayAlarm();
+                //MessageBox.Show(this, nextAlarm.ToString(), "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 nextAlarm = null;
             }
 
